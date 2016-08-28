@@ -1,7 +1,29 @@
-How to Setup Web To Lead Form to Capture GAUID?
+Salesforce x Measurement
+Protocol Integration Workshop
+Author: Mario Citadin
+
+Prerequesites:
+- Salesforce Developer Account (create one via: https://developer.salesforce.com/signup )
+- Google Analytics Account
+- Salesforce basic knowledge (e.g. How to create a custom field, how to create process builder)
+- HTML/JavaScript basic knowledge (e.g create html form, create simple javascript code to
+modify input field values )
+
+How to Capure GAUID in Salesforce?
+
+1 - Creating GAUID Field on Lead Object:
+  go to Setup > Lead > Fields > New
+    Type: Text
+    Label: GAUID
+    Length: 255
+    Name: GAUID
+
+2 - How to Setup Web To Lead Form to Capture GAUID?
 
 Open following JSBin:
-  goo.gl/w1HVTg OR http://jsbin.com/luxekifuta/edit?html,output
+  goo.gl/w1HVTg
+    OR
+  http://jsbin.com/luxekifuta/edit?html,output
 
 a) Clone the Bin.
 
