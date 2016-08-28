@@ -1,0 +1,50 @@
+<apex:page StandardController="APITemplate__c" extensions="FieldsMappingController" showHeader="true" sidebar="false">
+	<apex:includeScript value="https://code.jquery.com/jquery-2.1.4.min.js"/>
+	<!--<apex:detail inlineEdit="true" subject="{!APITemplate__c.Id}" relatedList="false"/>-->
+	<apex:form >
+	<apex:pageMessages />
+	<apex:pageBlock title="Google Analytics Field Mapping">
+		<apex:pageBlockButtons >
+			<apex:commandButton action="{!addMapping}" value="Add Parameter"/>
+			<apex:commandButton action="{!save}" onclick="fillNames();" value="Save"/>
+			<apex:commandButton action="{!cancel}" value="Cancel"/>
+		</apex:pageBlockButtons>
+		<apex:variable var="row" value="{!0}"/>
+		<apex:pageBlockTable value="{!fieldsMapping}" var="field">
+			<apex:column headerValue="Action">
+				<apex:commandLink value="Del" action="{!removeMapping}">
+					<apex:param name="row" value="{!row}"/>
+				</apex:commandLink>
+			</apex:column>
+			<apex:column headerValue="Google Parameter" >
+				<apex:inputHidden html-dataid="salesforceFieldName{!row}" value="{!field.Name}"/>
+				<apex:selectList id="googleparameter" required="false" html-dataid="{!row}" styleClass="salesforceSelect" value="{!field.ExternalFieldName__c}" size="1">
+					<apex:selectOptions value="{!googleAnalyticsFields}"/>
+				</apex:selectList>
+			</apex:column>
+			<apex:column headerValue="Salesforce Field">
+				<apex:selectList required="false" value="{!field.SalesforceFieldAPIName__c}" size="1">
+					<apex:selectOptions value="{!salesforceFields}"/>
+				</apex:selectList>
+			</apex:column>
+			<apex:column headerValue="Default Value">
+				<apex:inputField value="{!field.DefaultValue__c}"/>
+				<apex:variable var="row" value="{!row+1}"/>
+			</apex:column>
+		</apex:pageBlockTable>
+	</apex:pageBlock>
+	<apex:inputHidden value="{!APITemplate__c.HitType__c}"/>
+	<apex:inputHidden value="{!APITemplate__c.ObjectAPIName__c}"/>
+	<apex:inputHidden value="{!APITemplate__c.HitType__c}"/>
+	</apex:form>
+
+	<script>
+			function fillNames(){
+				jQuery('.salesforceSelect option:selected').each(function (index, element){
+					var row = jQuery(this).parent().attr('dataid');
+					jQuery('[dataid=salesforceFieldName'+row+']').attr('value', jQuery(this).text() );
+					console.log('row:' + row + ' | label: '+ jQuery(this).text());
+				});
+			}
+	</script>
+</apex:page>

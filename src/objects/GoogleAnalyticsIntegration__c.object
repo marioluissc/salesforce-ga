@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>URLEndpoint__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>URLEndpoint</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <label>Google Analytics Integration</label>
+    <visibility>Protected</visibility>
+</CustomObject>
