@@ -1,2 +1,10 @@
 Google Measurement Protocol.sublime-project
 package.xml
+ApplicationWrap.page
+ApplicationWrap.page-meta.xml
+SetupApplication.page
+SetupApplication.page-meta.xml
+ApplicationSetupPage.resource
+ApplicationSetupPage.resource-meta.xml
+SLDS202.resource
+SLDS202.resource-meta.xml
