@@ -4,7 +4,7 @@ public with sharing class FieldsMappingController {
 		private final APITemplate__c apiTemplate;
 		public List<APITemplateFieldMapping__c> fieldsMapping { get; set;	}
 		private List<APITemplateFieldMapping__c> fieldsMappingToDelete { get; set;	}
-
+		public String selectVar {get;set;}
     public FieldsMappingController(ApexPages.StandardController stdController) {
 			try {
 				this.apiTemplate = (APITemplate__c) stdController.getRecord();
@@ -19,7 +19,7 @@ public with sharing class FieldsMappingController {
 		private void initialize() {
 			fieldsMappingToDelete = new List<APITemplateFieldMapping__c>();
 			fieldsMapping = new List<APITemplateFieldMapping__c>();
-			fieldsMapping = [SELECT Id, Name, APITemplate__c , ExternalFieldName__c, SalesforceFieldAPIName__c, DefaultValue__c FROM APITemplateFieldMapping__c WHERE APITemplate__c = :apiTemplate.Id];
+			fieldsMapping = [SELECT Id, Name, APITemplate__c , ExternalFieldName__c, SelectedParameter__c, SalesforceFieldAPIName__c, DefaultValue__c FROM APITemplateFieldMapping__c WHERE APITemplate__c = :apiTemplate.Id];
 		}
 
 		//PUBLIC
@@ -72,19 +72,17 @@ public with sharing class FieldsMappingController {
 			return null;
 		}
 
-
 		//PRIVATE
 
 		private void validateFieldMapping() {
 			for (APITemplateFieldMapping__c field : fieldsMapping ){
-				if (field.ExternalFieldName__c == null)
+				if (field.ExternalFieldName__c == null || String.isBlank(field.ExternalFieldName__c))
 					throw new FieldMappingException('Google Parameter Fields are required.');
 				if (field.SalesforceFieldAPIName__c == null)
 					throw new FieldMappingException('Salesforce fields are required. Select the option "Set a Default Value" to define a fixed value.');
-
 			}
-
 		}
+
 		private List<SelectOption> listGoogleAnalyticsFields(String hitType){
 			List<SelectOption> options = new List<SelectOption>();
 			Map<String, List<GoogleAnalyticsParameter.Fields>> fieldsByEventName = getGoogleAnalyticsByHitTypeId();

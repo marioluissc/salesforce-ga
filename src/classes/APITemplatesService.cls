@@ -65,7 +65,32 @@ public with sharing class APITemplatesService {
 
 	public static String googleParametersJSON(){
 		String json=		'{'+
-		'  "hitTypes" :[{'+
+		'  "hitTypes" :[ '+
+		'	{' +
+		'    "name" : "all",'+
+		'    "fields" : ['+
+		'      {"label": "Data Source", "key" : "ds", "required" : false},'+
+		'      {"label": "IP Override", "key" : "uip", "required" : false},'+
+		'      {"label": "Geographical Override", "key" : "geoid", "required" : false},'+
+		'      {"label": "Tracking Id Override", "key" : "tid", "required" : false},'+
+		'      {"label": "Queue Time", "key" : "qt", "required" : false},'+
+		'      {"label": "User Id", "key" : "uid", "required" : false},'+
+		'      {"label": "User Agent Override", "key" : "ua", "required" : false},'+
+		'      {"label": "User Language", "key" : "ul", "required" : false},'+
+		'      {"label": "Document Referrer", "key" : "dr", "required" : false},'+
+		'      {"label": "Campaign Name", "key" : "cn", "required" : false},'+
+		'      {"label": "Campaign Source", "key" : "cs", "required" : false},'+
+		'      {"label": "Campaign Medium", "key" : "cm", "required" : false},'+
+		'      {"label": "Campaign Keyword", "key" : "ck", "required" : false},'+
+		'      {"label": "Campaign Content", "key" : "cc", "required" : false},'+
+		'      {"label": "Campaign ID", "key" : "ci", "required" : false},'+
+		'      {"label": "Google AdWords ID", "key" : "gclid", "required" : false},'+
+		'      {"label": "Google Display Ads ID", "key" : "dclid", "required" : false},'+
+		'      {"label": "Non-Interaction Hit", "key" : "ni", "required" : false},'+
+		'      {"label": "Custom Parameter", "key" : "customParam", "required" : false}'+
+		'    ]'+
+		'  },'+
+		'	{ '+
 		'    "name" : "event", '+
 		'    "fields" : ['+
 		'      {"label": "Client Id" , "key" : "cid", "required" : true},'+
@@ -98,15 +123,6 @@ public with sharing class APITemplatesService {
 		'      {"label": "Item Code", "key" : "ic", "required" : false},'+
 		'      {"label": "Item Category", "key" : "iv", "required" : false},'+
 		'      {"label": "Currency Code", "key" : "cu", "required" : false}'+
-		'    ]'+
-		'  },'+
-		'  {'+
-		'    "name" : "all",'+
-		'    "fields" : ['+
-		'      {"label": "Data Source", "key" : "ds", "required" : false},'+
-		'      {"label": "IP Override", "key" : "uip", "required" : false},'+
-		'      {"label": "Geographical Override", "key" : "geoid", "required" : false},'+
-		'      {"label": "Anonymize IP", "key" : "aip", "required" : false}'+
 		'    ]'+
 		'  }'+
 		'  ]'+

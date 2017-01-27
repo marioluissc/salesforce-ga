@@ -10,6 +10,7 @@
 			<apex:commandButton action="{!cancel}" value="Cancel"/>
 		</apex:pageBlockButtons>
 		<apex:variable var="row" value="{!0}"/>
+
 		<apex:pageBlockTable value="{!fieldsMapping}" var="field">
 			<apex:column headerValue="Action">
 				<apex:commandLink value="Del" action="{!removeMapping}">
@@ -18,9 +19,10 @@
 			</apex:column>
 			<apex:column headerValue="Google Parameter" >
 				<apex:inputHidden html-dataid="salesforceFieldName{!row}" value="{!field.Name}"/>
-				<apex:selectList id="googleparameter" required="false" html-dataid="{!row}" styleClass="salesforceSelect" value="{!field.ExternalFieldName__c}" size="1">
+				<apex:selectList id="googleparameter" required="false" html-dataid="{!row}" onchange="showCustomParameter(this);" styleClass="salesforceSelect" value="{!field.SelectedParameter__c}" size="1">
 					<apex:selectOptions value="{!googleAnalyticsFields}"/>
-				</apex:selectList>
+				</apex:selectList> <br/>
+				<apex:inputText style="display:none;" id="googleCustomParameter" html-dataid="googleCustomParameter{!row}" value="{!field.ExternalFieldName__c}"/>
 			</apex:column>
 			<apex:column headerValue="Salesforce Field">
 				<apex:selectList required="false" value="{!field.SalesforceFieldAPIName__c}" size="1">
@@ -39,12 +41,43 @@
 	</apex:form>
 
 	<script>
+			initFields();
+
 			function fillNames(){
 				jQuery('.salesforceSelect option:selected').each(function (index, element){
 					var row = jQuery(this).parent().attr('dataid');
 					jQuery('[dataid=salesforceFieldName'+row+']').attr('value', jQuery(this).text() );
 					console.log('row:' + row + ' | label: '+ jQuery(this).text());
 				});
+			}
+
+
+			// function showCustomParameter(){
+			// 	jQuery('.salesforceSelect option:selected').each(function (index, element){
+			// 		var row = jQuery(this).parent().attr('dataid');
+			// 		if (jQuery.attr(''))
+			// 		jQuery('[dataid=googleCustomParameter'+row+']').attr('value', jQuery(this).value() );
+			// 		console.log('row:' + row + ' | label: '+ jQuery(this).text());
+			//
+			//
+			// 	});
+			// }
+
+			function initFields(){
+				jQuery('.salesforceSelect').each(function (index, element){
+					showCustomParameter(this);
+				});
+			}
+
+			function showCustomParameter(field) {
+				if (jQuery(field).find('option:selected').val() == "customParam") {
+					var row = jQuery(field).attr('dataid');
+					jQuery('[dataid=googleCustomParameter'+row+']').show();
+				}else{
+					var row = jQuery(field).attr('dataid');
+					jQuery('[dataid=googleCustomParameter'+row+']').val(jQuery(field).find('option:selected').val());
+					jQuery('[dataid=googleCustomParameter'+row+']').hide();
+				}
 			}
 	</script>
 </apex:page>
